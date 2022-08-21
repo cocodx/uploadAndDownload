@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author amazfit
  * @date 2022-08-21 下午10:52
  **/
-@MapperScan("io.github.cocodx.mapper")
+@MapperScan("io.github.cocodx.dao")
 @SpringBootApplication
 public class UpDownApplication {
 

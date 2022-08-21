@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
 
-<h1>欢迎：xxxx</h1>
+<h1>欢迎：<span th:if="${session.user!=null}" th:text="${session.user.userName}"></span></h1>
 <h3>文件列表</h3>
 
 <table>
