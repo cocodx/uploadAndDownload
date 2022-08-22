@@ -53,6 +53,7 @@ public class FileController {
         //大小
         Long size = aaa.getSize();
         //文件类型
+
         String type = aaa.getContentType();
 
         String realPath = ResourceUtils.getURL("classpath:").getPath()+"/static/files";

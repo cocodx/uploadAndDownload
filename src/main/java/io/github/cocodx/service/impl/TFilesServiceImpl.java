@@ -22,6 +22,8 @@ public class TFilesServiceImpl implements TFilesService {
 
     @Override
     public void save(TFiles tFiles) {
+        String isImg = tFiles.getType().startsWith("image")? "yes":"no";
+        tFiles.setIsImg(isImg);
         filesDao.save(tFiles);
     }
 }

@@ -32,7 +32,10 @@
       <td><span th:text="${file.path}"></span></td>
       <td><span th:text="${file.size}"></span></td>
       <td><span th:text="${file.type}"></span></td>
-      <td><span th:text="${file.isImg}"></span></td>
+      <td>
+        <img th:if="${file.isImg}=='yes'" style="width: 100px;height: auto" th:src="${#servletContext.contextPath}+${file.path}+'/'+${file.newFileName}" alt="">
+        <span th:if="${file.isImg}=='no'" th:text="${file.isImg}"></span>
+      </td>
       <td><span th:text="${file.downCount}"></span></td>
       <td><span th:text="${file.uploadTime}"></span></td>
       <td>
