@@ -26,4 +26,14 @@ public class TFilesServiceImpl implements TFilesService {
         tFiles.setIsImg(isImg);
         filesDao.save(tFiles);
     }
+
+    @Override
+    public TFiles selectById(Long id) {
+        return filesDao.selectById(id);
+    }
+
+    @Override
+    public void update(TFiles tFiles) {
+        filesDao.update(tFiles);
+    }
 }

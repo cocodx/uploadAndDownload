@@ -24,9 +24,15 @@
         type,is_img,down_count,
         upload_time
     </sql>
+    <update id="update" parameterType="TFiles">
+        UPDATE t_files SET down_count = #{downCount} WHERE id = #{id}
+    </update>
 
     <select id="selectListByUserId" resultMap="BaseResultMap">
         SELECT * FROM t_files WHERE user_id = #{userId}
+    </select>
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT * FROM t_files WHERE id = #{id}
     </select>
 
     <insert id="save" parameterType="TFiles" useGeneratedKeys="true" keyProperty="id">

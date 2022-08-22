@@ -12,4 +12,8 @@ public interface TFilesDao {
     List<TFiles> selectListByUserId(@Param("userId") Long userId);
 
     void save(TFiles tFiles);
+
+    TFiles selectById(@Param("id") Long id);
+
+    void update(TFiles tFiles);
 }

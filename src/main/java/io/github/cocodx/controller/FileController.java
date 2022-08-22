@@ -3,6 +3,7 @@ package io.github.cocodx.controller;
 import io.github.cocodx.entity.TFiles;
 import io.github.cocodx.entity.User;
 import io.github.cocodx.service.TFilesService;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,10 +13,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -31,6 +33,7 @@ public class FileController {
 
     @Autowired
     private TFilesService tFilesService;
+
 
     @GetMapping("/findAll")
     public String findAll(HttpSession session, Model model){
@@ -68,9 +71,27 @@ public class FileController {
 
         TFiles tFiles = new TFiles();
         tFiles.setOldFileName(oldFileName).setNewFileName(newFileName).setExt(extension).setSize(String.valueOf(size))
-                .setType(type).setPath("/files/"+dataFormat).setUserId(user.getId());
+                .setType(type).setPath("/files/"+dataFormat).setUserId(user.getId()).setDownCount(0);
         tFilesService.save(tFiles);
 
         return "redirect:/file/findAll";
+    }
+
+    @GetMapping("/download")
+    public void download(Long id, HttpServletResponse response) throws IOException {
+        TFiles tFiles = tFilesService.selectById(id);
+        tFiles.setDownCount(tFiles.getDownCount()+1);
+        tFilesService.update(tFiles);
+
+        String realPath = ResourceUtils.getURL("classpath:").getPath() + "/static" + tFiles.getPath();
+
+        FileInputStream fileInputStream = new FileInputStream(new File(realPath, tFiles.getNewFileName()));
+        //附件下载
+        response.setHeader("content-disposition","attachment;fileName="+ URLEncoder.encode(tFiles.getOldFileName(),"UTF-8"));
+        //获取响应输出流
+        ServletOutputStream servletOutputStream = response.getOutputStream();
+        IOUtils.copy(fileInputStream,servletOutputStream);
+        IOUtils.closeQuietly(fileInputStream);
+        IOUtils.closeQuietly(servletOutputStream);
     }
 }

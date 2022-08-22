@@ -39,7 +39,7 @@
       <td><span th:text="${file.downCount}"></span></td>
       <td><span th:text="${file.uploadTime}"></span></td>
       <td>
-        <a href="">下载</a>
+        <a th:href="@{/file/download(id=${file.id})}">下载</a>
         <a href="">在线打开</a>
         <a href="">删除</a>
       </td>
