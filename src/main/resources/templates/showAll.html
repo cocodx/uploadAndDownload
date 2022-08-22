@@ -9,7 +9,7 @@
 <h1>欢迎：<span th:if="${session.user!=null}" th:text="${session.user.userName}"></span></h1>
 <h3>文件列表</h3>
 
-<table>
+<table border="1px">
   <thead>
     <tr>
       <th>ID</th>
@@ -23,6 +23,22 @@
       <th>下载次数</th>
       <th>上传时间</th>
       <th>操作</th>
+    </tr>
+    <tr th:each="file,fileStat:${files}">
+      <td><span th:text="${file.id}"></span></td>
+      <td><span th:text="${file.oldFileName}"></span></td>
+      <td><span th:text="${file.newFileName}"></span></td>
+      <td><span th:text="${file.ext}"></span></td>
+      <td><span th:text="${file.path}"></span></td>
+      <td><span th:text="${file.size}"></span></td>
+      <td><span th:text="${file.type}"></span></td>
+      <td><span th:text="${file.isImg}"></span></td>
+      <td><span th:text="${file.downCount}"></span></td>
+      <td><span th:text="${file.uploadTime}"></span></td>
+      <td>
+        <a href="">下载</a>
+        <a href="">删除</a>
+      </td>
     </tr>
   </thead>
 </table>
