@@ -24,7 +24,25 @@
         type,is_img,down_count,
         upload_time
     </sql>
+
     <select id="selectListByUserId" resultMap="BaseResultMap">
         SELECT * FROM t_files WHERE user_id = #{userId}
     </select>
+
+    <insert id="save" parameterType="TFiles" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_files VALUES (
+                                    #{id},
+                                    #{oldFileName},
+                                    #{newFileName},
+                                    #{ext},
+                                    #{path},
+                                    #{size},
+                                    #{type},
+                                    #{isImg},
+                                    #{downCount},
+                                    #{uploadTime},
+                                    #{userId}
+                                   )
+
+    </insert>
 </mapper>

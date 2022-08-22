@@ -9,4 +9,6 @@ public interface TFilesService {
 
 
     List<TFiles> selectListByUserId(Long userId);
+
+    void save(TFiles tFiles);
 }

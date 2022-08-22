@@ -37,6 +37,7 @@
       <td><span th:text="${file.uploadTime}"></span></td>
       <td>
         <a href="">下载</a>
+        <a href="">在线打开</a>
         <a href="">删除</a>
       </td>
     </tr>
@@ -44,7 +45,7 @@
 </table>
 <hr>
 <h3>上传文件</h3>
-<form action="">
+<form th:action="@{/file/upload}" method="post" enctype="multipart/form-data">
   <input type="file" name="aaa"> <input type="submit" value="上传文件">
 </form>
 </body>

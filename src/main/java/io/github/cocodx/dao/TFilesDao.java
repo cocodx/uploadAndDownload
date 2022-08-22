@@ -10,4 +10,6 @@ import java.util.List;
 public interface TFilesDao {
 
     List<TFiles> selectListByUserId(@Param("userId") Long userId);
+
+    void save(TFiles tFiles);
 }

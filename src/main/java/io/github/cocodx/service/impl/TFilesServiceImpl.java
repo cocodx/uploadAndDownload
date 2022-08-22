@@ -19,4 +19,9 @@ public class TFilesServiceImpl implements TFilesService {
     public List<TFiles> selectListByUserId(Long userId) {
         return filesDao.selectListByUserId(userId);
     }
+
+    @Override
+    public void save(TFiles tFiles) {
+        filesDao.save(tFiles);
+    }
 }
