@@ -36,4 +36,9 @@ public class TFilesServiceImpl implements TFilesService {
     public void update(TFiles tFiles) {
         filesDao.update(tFiles);
     }
+
+    @Override
+    public void delete(Long id) {
+        filesDao.delete(id);
+    }
 }

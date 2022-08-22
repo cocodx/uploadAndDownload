@@ -27,6 +27,9 @@
     <update id="update" parameterType="TFiles">
         UPDATE t_files SET down_count = #{downCount} WHERE id = #{id}
     </update>
+    <delete id="delete">
+        DELETE FROM t_files WHERE id = #{id}
+    </delete>
 
     <select id="selectListByUserId" resultMap="BaseResultMap">
         SELECT * FROM t_files WHERE user_id = #{userId}

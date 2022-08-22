@@ -16,4 +16,6 @@ public interface TFilesDao {
     TFiles selectById(@Param("id") Long id);
 
     void update(TFiles tFiles);
+
+    void delete(@Param("id")Long id);
 }

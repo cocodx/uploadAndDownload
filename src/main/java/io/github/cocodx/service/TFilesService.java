@@ -15,4 +15,6 @@ public interface TFilesService {
     TFiles selectById(Long id);
 
     void update(TFiles tFiles);
+
+    void delete(Long id);
 }

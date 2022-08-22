@@ -78,20 +78,38 @@ public class FileController {
     }
 
     @GetMapping("/download")
-    public void download(Long id, HttpServletResponse response) throws IOException {
+    public void download(String openStyle,Long id, HttpServletResponse response) throws IOException {
+        //打开方式
+        openStyle = openStyle==null? "attachment":openStyle;
+
         TFiles tFiles = tFilesService.selectById(id);
-        tFiles.setDownCount(tFiles.getDownCount()+1);
-        tFilesService.update(tFiles);
+
+        if ("attachment".equals(openStyle)){
+            tFiles.setDownCount(tFiles.getDownCount()+1);
+            tFilesService.update(tFiles);
+        }
 
         String realPath = ResourceUtils.getURL("classpath:").getPath() + "/static" + tFiles.getPath();
 
         FileInputStream fileInputStream = new FileInputStream(new File(realPath, tFiles.getNewFileName()));
         //附件下载
-        response.setHeader("content-disposition","attachment;fileName="+ URLEncoder.encode(tFiles.getOldFileName(),"UTF-8"));
+        response.setHeader("content-disposition",openStyle+";fileName="+ URLEncoder.encode(tFiles.getOldFileName(),"UTF-8"));
         //获取响应输出流
         ServletOutputStream servletOutputStream = response.getOutputStream();
         IOUtils.copy(fileInputStream,servletOutputStream);
         IOUtils.closeQuietly(fileInputStream);
         IOUtils.closeQuietly(servletOutputStream);
+    }
+
+    @GetMapping("/delete")
+    public String delete(Long id)throws IOException{
+        TFiles tFiles = tFilesService.selectById(id);
+        String realPath = ResourceUtils.getURL("classpath:").getPath() + "/static" + tFiles.getPath();
+        File file = new File(realPath, tFiles.getNewFileName());
+        if (file.exists()){
+            file.delete();
+        }
+        tFilesService.delete(id);
+        return "redirect:/file/findAll";
     }
 }
