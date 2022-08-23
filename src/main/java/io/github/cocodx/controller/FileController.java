@@ -26,6 +26,8 @@ import java.util.UUID;
 /**
  * @author amazfit
  * @date 2022-08-22 上午6:23
+ *
+ * https://blog.csdn.net/weixin_41866607/article/details/107634879
  **/
 @Controller
 @RequestMapping("/file")
