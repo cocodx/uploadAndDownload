@@ -10,7 +10,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class IndexController {
 
-    @GetMapping("/login")
+    /**
+     * 跳转登录页
+     * @return
+     */
+    @GetMapping("/page/login")
     public String toLogin(){
         return "login";
     }

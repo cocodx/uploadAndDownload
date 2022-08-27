@@ -9,6 +9,8 @@
 <form th:action="@{/user/login}" method="post" >
     username:<input type="text" name="userName"/> <br>
     password:<input type="text" name="password"/> <br>
+    验证码：</strong><input style="line-height: 30px"  type="text" name="code"/>
+    <img style="width: 100px;height: 30px;" th:src="${#servletContext.contextPath}+'/user/code'" onclick="this.src=this.src+'?'" alt="验证码">
     <input type="submit" value="登录"/> <br>
 </form>
 </body>
